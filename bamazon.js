@@ -24,7 +24,7 @@ var newQuantity = 0;
 function findItems() {
 
 
-    var query = "SELECT item_id, product_name, price, stock_quantity FROM products"
+    var query = "SELECT * FROM products"
     connection.query(query, function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
@@ -46,7 +46,6 @@ function updateProducts() {
             }
         ], function (err, res) {
             if (err) throw err;
-            console.log(`Purchase complete! new remaining items available: ${newQuantity}`);
             inquirer
                 .prompt([
                     {
@@ -106,6 +105,8 @@ function start() {
                     var purchasequantity = parseInt(res.quantity);
                     newQuantity = itemQuantity - purchasequantity;
                     updateProducts()
+                    var total = itemPrice * purchasequantity;
+                    console.log(`\n\nPurchase complete.  Total: $${total}.\n\n`)
                 })
         });
 }
