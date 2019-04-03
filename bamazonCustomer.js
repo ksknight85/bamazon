@@ -28,7 +28,7 @@ function findItems() {
     connection.query(query, function (err, res) {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log(`ID: ${res[i].item_id} || Item name: ${res[i].product_name}\nPrice: ${res[i].price} || In-Stock: ${res[i].stock_quantity} \n`);
+            console.log(`Item name: ${res[i].product_name}\nID: ${res[i].item_id}  || In-Stock: ${res[i].stock_quantity}  || Price: ${res[i].price} \n\n`);
             itemsArr.push(res[i]);
         }
         start();
