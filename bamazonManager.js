@@ -24,7 +24,7 @@ function findItems() {
         for (var i = 0; i < res.length; i++) {
             itemsArr.push(res[i]);
         }
-    })
+    });
 };
 
 function productsForSale() {
@@ -86,8 +86,9 @@ function addToInventory() {
                     }
                 ], function (err, res) {
                     console.log(`\n\nProduct ${itemsArr[item - 1].item_id} has been updated. New stock quantity is: ${newQuantity}\n\n`)
+                    setTimeout(start, 200);
+
                 })
-            setTimeout(start, 200);
         });
 };
 
@@ -156,10 +157,8 @@ function addNewProduct() {
                                 , function (err, res) {
                                     if (err) throw err;
                                     console.log(`Inserted ${product_name} into products database\n\n`);
-                                }
-                            );
+                                })
                             setTimeout(start, 200);
-
                             break;
 
                         case "No":
@@ -175,6 +174,7 @@ function addNewProduct() {
 };
 
 function start() {
+
     inquirer
         .prompt([
             {
@@ -188,7 +188,6 @@ function start() {
                 case "View Products for Sale":
                     productsForSale();
                     setTimeout(start, 200);
-
                     break;
 
                 case "View Low Inventory":
@@ -196,7 +195,7 @@ function start() {
                     break;
 
                 case "Add to Inventory":
-                    setTimeout(addToInventory, 200);
+                    addToInventory();
                     break;
 
                 case "Add New Product":
@@ -209,6 +208,6 @@ function start() {
             }
         });
 };
-
 findItems();
+
 setTimeout(start, 200);
